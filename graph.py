@@ -1,4 +1,4 @@
-from nodes import City
+from node import City
 
 class CityGraph:
     def __init__(self):
