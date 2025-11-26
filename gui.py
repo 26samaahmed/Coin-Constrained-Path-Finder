@@ -28,55 +28,57 @@ class PathFinderGUI:
     
     def create_widgets(self):
         # Control Panel
-        control_frame = tk.Frame(self.root, bg="#ecf0f1", padx=15, pady=15)
+        control_frame = tk.Frame(self.root, bg="#2C0603", padx=15, pady=15)
         control_frame.pack(side=tk.LEFT, fill=tk.Y)
         
-        title = tk.Label(control_frame, text="Path Finder Game", font=("Arial", 16, "bold"),
-                        bg="#ecf0f1", fg="black")
+        title = tk.Label(control_frame, text="Path Finder Game", font=("Arial", 25, "bold"),
+                        bg="#2C0603", fg="white")
         title.pack(pady=(0, 15))
         
         # Game Instructions
+        """
         self.instruction_label = tk.Label(control_frame, 
                                          text="Step 1: Set up your game",
-                                         font=("Arial", 10, "bold"),
-                                         bg="#ecf0f1", fg="#34495e", 
+                                         font=("Arial", 15, "bold"),
+                                         bg="#2C0603", fg="white", 
                                          wraplength=200, justify=tk.LEFT)
         self.instruction_label.pack(pady=(0, 12))
+        """
         
         # Start City
         tk.Label(control_frame, text="Start City:", font=("Arial", 11),
-                bg="#ecf0f1", fg="black").pack(anchor=tk.W, pady=(8, 3))
+                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
         self.start_var = tk.StringVar(value="NYC")
         self.start_combo = ttk.Combobox(control_frame, textvariable=self.start_var,
                                    values=self.graph.get_city_names(),
-                                   state="readonly", width=18)
+                                   state="readonly", width=20)
         self.start_combo.pack(pady=(0, 8))
         
         # Destination City
         tk.Label(control_frame, text="Destination:", font=("Arial", 11),
-                bg="#ecf0f1", fg="black").pack(anchor=tk.W, pady=(8, 3))
+                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
         self.dest_var = tk.StringVar(value="LA")
         self.dest_combo = ttk.Combobox(control_frame, textvariable=self.dest_var,
                                   values=self.graph.get_city_names(),
-                                  state="readonly", width=18)
+                                  state="readonly", width=20)
         self.dest_combo.pack(pady=(0, 8))
         
         # Coin Budget
         tk.Label(control_frame, text="Coin Budget:", font=("Arial", 11),
-                bg="#ecf0f1", fg="black").pack(anchor=tk.W, pady=(8, 3))
+                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
         self.coins_var = tk.StringVar(value="25")
         self.coins_entry = tk.Entry(control_frame, textvariable=self.coins_var,
-                              font=("Arial", 11), width=20)
+                              font=("Arial", 11), width=22)
         self.coins_entry.pack(pady=(0, 15))
         
         # Buttons Frame
-        buttons_frame = tk.Frame(control_frame, bg="#ecf0f1")
+        buttons_frame = tk.Frame(control_frame, bg="#2C0603")
         buttons_frame.pack(fill=tk.X, pady=5)
         
         # Start Game Button
         self.start_game_btn = tk.Button(buttons_frame, text="Start Game", 
                                         font=("Arial", 12, "bold"),
-                                        bg="#27ae60", fg="black", 
+                                        bg="#EBD4CB", fg="#2C0603", 
                                         command=self.start_game,
                                         relief=tk.FLAT, padx=15, pady=8)
         self.start_game_btn.pack(pady=5, fill=tk.X)
@@ -84,49 +86,49 @@ class PathFinderGUI:
         # Submit Path Button (hidden initially)
         self.submit_btn = tk.Button(buttons_frame, text="Submit My Path", 
                                     font=("Arial", 12, "bold"),
-                                    bg="#9b59b6", fg="black", 
+                                    bg="#EBD4CB", fg="#2C0603", 
                                     command=self.submit_path,
                                     relief=tk.FLAT, padx=15, pady=8)
         
         # Undo Last Move Button (hidden initially)
         self.undo_btn = tk.Button(buttons_frame, text="Undo Last Move", 
                                   font=("Arial", 10),
-                                  bg="#f39c12", fg="black", 
+                                  bg="#EBD4CB", fg="#2C0603", 
                                   command=self.undo_move,
                                   relief=tk.FLAT, padx=15, pady=6)
         
         # Show AI Solution Button (hidden initially)
         self.ai_solution_btn = tk.Button(buttons_frame, text="Show AI Solution", 
                                          font=("Arial", 11),
-                                         bg="#3498db", fg="black", 
+                                         bg="#EBD4CB", fg="#2C0603", 
                                          command=self.show_ai_solution,
                                          relief=tk.FLAT, padx=15, pady=7)
         
         # Reset Button
         self.reset_btn = tk.Button(buttons_frame, text="Reset Game", 
                                    font=("Arial", 10),
-                                   bg="#e74c3c", fg="black", 
+                                   bg="#EBD4CB", fg="#2C0603", 
                                    command=self.reset_game,
                                    relief=tk.FLAT, padx=15, pady=7)
         self.reset_btn.pack(pady=5, fill=tk.X)
         
         # Info Display
-        self.info_frame = tk.Frame(control_frame, bg="white", relief=tk.GROOVE, bd=2)
+        self.info_frame = tk.Frame(control_frame, bg="#EBD4CB", relief=tk.GROOVE, bd=2)
         self.info_frame.pack(pady=15, fill=tk.BOTH, expand=True)
         
         tk.Label(self.info_frame, text="Game Status", font=("Arial", 12, "bold"),
-                bg="white", fg="black").pack(pady=8)
+                bg="#EBD4CB", fg="#2C0603").pack(pady=8)
         
         self.result_label = tk.Label(self.info_frame, text="Set up your game and click Start!", 
                                      font=("Arial", 10),
-                                     bg="white", fg="black", justify=tk.LEFT)
+                                     bg="#EBD4CB", fg="#2C0603", justify=tk.LEFT)
         self.result_label.pack(padx=8, pady=8, fill=tk.BOTH, expand=True)
         
         # Canvas for visualization
-        canvas_frame = tk.Frame(self.root, bg="white")
+        canvas_frame = tk.Frame(self.root, bg="#2C0603")
         canvas_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
         
-        self.canvas = tk.Canvas(canvas_frame, bg="#ecf0f1", highlightthickness=0)
+        self.canvas = tk.Canvas(canvas_frame, bg="#2C0603", highlightthickness=0)
         self.canvas.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Bind click events
