@@ -27,108 +27,111 @@ class PathFinderGUI:
         self.draw_graph()
     
     def create_widgets(self):
-        # Control Panel
-        control_frame = tk.Frame(self.root, bg="#2C0603", padx=15, pady=15)
+        # Control Panel with Almond Silk background
+        control_frame = tk.Frame(self.root, bg="#EBD4CB", padx=15, pady=15)
         control_frame.pack(side=tk.LEFT, fill=tk.Y)
         
-        title = tk.Label(control_frame, text="Path Finder Game", font=("Arial", 25, "bold"),
-                        bg="#2C0603", fg="white")
+        title = tk.Label(control_frame, text="Path Finder Game", font=("Arial", 16, "bold"),
+                        bg="#EBD4CB", fg="#2C0703")
         title.pack(pady=(0, 15))
         
         # Game Instructions
-        """
         self.instruction_label = tk.Label(control_frame, 
                                          text="Step 1: Set up your game",
-                                         font=("Arial", 15, "bold"),
-                                         bg="#2C0603", fg="white", 
+                                         font=("Arial", 10, "bold"),
+                                         bg="#EBD4CB", fg="#890620", 
                                          wraplength=200, justify=tk.LEFT)
         self.instruction_label.pack(pady=(0, 12))
-        """
         
         # Start City
         tk.Label(control_frame, text="Start City:", font=("Arial", 11),
-                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
-        self.start_var = tk.StringVar(value="Select Node")
+                bg="#EBD4CB", fg="#2C0703").pack(anchor=tk.W, pady=(8, 3))
+        self.start_var = tk.StringVar(value="Select Start Node")
         self.start_combo = ttk.Combobox(control_frame, textvariable=self.start_var,
                                    values=self.graph.get_city_names(),
-                                   state="readonly", width=20)
+                                   state="readonly", width=18)
         self.start_combo.pack(pady=(0, 8))
         
         # Destination City
         tk.Label(control_frame, text="Destination:", font=("Arial", 11),
-                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
-        self.dest_var = tk.StringVar(value="Select Node")
+                bg="#EBD4CB", fg="#2C0703").pack(anchor=tk.W, pady=(8, 3))
+        self.dest_var = tk.StringVar(value="Select Goal Node")
         self.dest_combo = ttk.Combobox(control_frame, textvariable=self.dest_var,
                                   values=self.graph.get_city_names(),
-                                  state="readonly", width=20)
+                                  state="readonly", width=18)
         self.dest_combo.pack(pady=(0, 8))
         
         # Coin Budget
         tk.Label(control_frame, text="Coin Budget:", font=("Arial", 11),
-                bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
+                bg="#EBD4CB", fg="#2C0703").pack(anchor=tk.W, pady=(8, 3))
         self.coins_var = tk.StringVar(value="25")
         self.coins_entry = tk.Entry(control_frame, textvariable=self.coins_var,
-                              font=("Arial", 11), width=22)
+                              font=("Arial", 11), width=20)
         self.coins_entry.pack(pady=(0, 15))
         
         # Buttons Frame
-        buttons_frame = tk.Frame(control_frame, bg="#2C0603")
+        buttons_frame = tk.Frame(control_frame, bg="#EBD4CB")
         buttons_frame.pack(fill=tk.X, pady=5)
         
-        # Start Game Button
+        # Start Game Button - Burgundy
         self.start_game_btn = tk.Button(buttons_frame, text="Start Game", 
                                         font=("Arial", 12, "bold"),
-                                        bg="#EBD4CB", fg="#2C0603", 
+                                        bg="#890620", fg="white", 
                                         command=self.start_game,
-                                        relief=tk.FLAT, padx=15, pady=8)
+                                        relief=tk.FLAT, padx=15, pady=8,
+                                        activebackground="#2C0703")
         self.start_game_btn.pack(pady=5, fill=tk.X)
         
-        # Submit Path Button (hidden initially)
+        # Submit Path Button - Berry Crush
         self.submit_btn = tk.Button(buttons_frame, text="Submit My Path", 
                                     font=("Arial", 12, "bold"),
-                                    bg="#EBD4CB", fg="#2C0603", 
+                                    bg="#B6465F", fg="white", 
                                     command=self.submit_path,
-                                    relief=tk.FLAT, padx=15, pady=8)
+                                    relief=tk.FLAT, padx=15, pady=8,
+                                    activebackground="#890620")
         
-        # Undo Last Move Button (hidden initially)
+        # Undo Last Move Button - Rosy Taupe
         self.undo_btn = tk.Button(buttons_frame, text="Undo Last Move", 
                                   font=("Arial", 10),
-                                  bg="#EBD4CB", fg="#2C0603", 
+                                  bg="#DA9F93", fg="#2C0703", 
                                   command=self.undo_move,
-                                  relief=tk.FLAT, padx=15, pady=6)
+                                  relief=tk.FLAT, padx=15, pady=6,
+                                  activebackground="#EBD4CB")
         
-        # Show AI Solution Button (hidden initially)
+        # Show AI Solution Button - Rich Mahogany
         self.ai_solution_btn = tk.Button(buttons_frame, text="Show AI Solution", 
                                          font=("Arial", 11),
-                                         bg="#EBD4CB", fg="#2C0603", 
+                                         bg="#2C0703", fg="white", 
                                          command=self.show_ai_solution,
-                                         relief=tk.FLAT, padx=15, pady=7)
+                                         relief=tk.FLAT, padx=15, pady=7,
+                                         activebackground="#890620")
         
-        # Reset Button
+        # Reset Button - Berry Crush
         self.reset_btn = tk.Button(buttons_frame, text="Reset Game", 
                                    font=("Arial", 10),
-                                   bg="#EBD4CB", fg="#2C0603", 
+                                   bg="#B6465F", fg="white", 
                                    command=self.reset_game,
-                                   relief=tk.FLAT, padx=15, pady=7)
+                                   relief=tk.FLAT, padx=15, pady=7,
+                                   activebackground="#890620")
         self.reset_btn.pack(pady=5, fill=tk.X)
         
-        # Info Display
-        self.info_frame = tk.Frame(control_frame, bg="#EBD4CB", relief=tk.GROOVE, bd=2)
+        # Info Display - Rosy Taupe background
+        self.info_frame = tk.Frame(control_frame, bg="#DA9F93", relief=tk.GROOVE, bd=2)
         self.info_frame.pack(pady=15, fill=tk.BOTH, expand=True)
         
         tk.Label(self.info_frame, text="Game Status", font=("Arial", 12, "bold"),
-                bg="#EBD4CB", fg="#2C0603").pack(pady=8)
+                bg="#DA9F93", fg="#2C0703").pack(pady=8)
         
         self.result_label = tk.Label(self.info_frame, text="Set up your game and click Start!", 
                                      font=("Arial", 10),
-                                     bg="#EBD4CB", fg="#2C0603", justify=tk.LEFT)
+                                     bg="#DA9F93", fg="#2C0703", justify=tk.LEFT)
         self.result_label.pack(padx=8, pady=8, fill=tk.BOTH, expand=True)
         
-        # Canvas for visualization
-        canvas_frame = tk.Frame(self.root, bg="#2C0603")
+        # Canvas for visualization - Almond Silk background
+        canvas_frame = tk.Frame(self.root, bg="#EBD4CB")
         canvas_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
         
-        self.canvas = tk.Canvas(canvas_frame, bg="#2C0603", highlightthickness=0)
+        self.canvas = tk.Canvas(canvas_frame, bg="#EBD4CB", highlightthickness=0)
         self.canvas.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
         
         # Bind click events
@@ -149,16 +152,16 @@ class PathFinderGUI:
                     
                     # Draw line
                     self.canvas.create_line(x1+100, y1+50, x2+100, y2+50,
-                                          fill="#95a5a6", width=2, tags="edge")
+                                          fill="#B6465F", width=2, tags="edge")
                     
                     # Draw edge labels
                     mx, my = (x1+x2)//2 + 100, (y1+y2)//2 + 50
                     self.canvas.create_text(mx, my-15, 
                                           text=f"D:{edge_info['distance']}",
-                                          fill="#7f8c8d", font=("Arial", 9))
+                                          fill="#2C0703", font=("Arial", 9))
                     self.canvas.create_text(mx, my+5, 
                                           text=f"C:{edge_info['coins']}",
-                                          fill="#e67e22", font=("Arial", 9, "bold"))
+                                          fill="#890620", font=("Arial", 9, "bold"))
         
         # Draw cities
         for city_name in self.graph.get_city_names():
@@ -166,25 +169,25 @@ class PathFinderGUI:
             city = self.graph.get_city(city_name)
             
             # Determine city color based on state
-            if self.game_mode == "playing":
+            if self.game_mode == "playing" or self.game_mode == "finished" or self.game_mode == "comparing":
                 if city == self.current_city:
-                    color = "#27ae60"  # Green for current
-                    outline = "#229954"
+                    color = "#890620"  # Burgundy for current
+                    outline = "#2C0703"
                 elif city == self.start_city:
-                    color = "#3498db"  # Blue for start
-                    outline = "#2980b9"
+                    color = "#B6465F"  # Berry Crush for start
+                    outline = "#890620"
                 elif city == self.goal_city:
-                    color = "#e74c3c"  # Red for goal
-                    outline = "#c0392b"
+                    color = "#2C0703"  # Rich Mahogany for goal
+                    outline = "#890620"
                 elif city in [self.graph.get_city(c.cityName) for c in self.user_path]:
-                    color = "#f39c12"  # Orange for visited
-                    outline = "#e67e22"
+                    color = "#DA9F93"  # Rosy Taupe for visited
+                    outline = "#B6465F"
                 else:
-                    color = "#95a5a6"  # Gray for unvisited
-                    outline = "#7f8c8d"
+                    color = "#EBD4CB"  # Almond Silk for unvisited
+                    outline = "#DA9F93"
             else:
-                color = "#3498db"
-                outline = "#2980b9"
+                color = "#B6465F"  # Berry Crush default
+                outline = "#890620"
             
             # Draw city circle
             self.canvas.create_oval(x+80, y+30, x+120, y+70,
@@ -199,7 +202,7 @@ class PathFinderGUI:
             # Draw heuristic value below the city
             heuristic = city.get_heuristic()
             self.canvas.create_text(x+100, y+80, text=f"h={int(heuristic)}",
-                                  fill="#9b59b6", font=("Arial", 10, "bold"),
+                                  fill="#890620", font=("Arial", 10, "bold"),
                                   tags=f"heuristic_{city_name}")
     
     def start_game(self):
@@ -239,6 +242,47 @@ class PathFinderGUI:
             
         except ValueError:
             messagebox.showerror("Invalid Input", "Please enter a valid coin budget!")
+    
+    def draw_character(self):
+        """Draw the cute traveling character at current position"""
+        if self.current_city is None:
+            return
+        
+        # Remove old character
+        self.canvas.delete("character")
+        
+        x, y = self.graph.get_position(self.current_city.cityName)
+        
+        # Draw character (cute person icon)
+        # Head
+        self.canvas.create_oval(x+95, y+15, x+105, y+25,
+                              fill="#FFE5CC", outline="#2C0703",
+                              width=2, tags="character")
+        
+        # Body (triangle/dress shape)
+        self.canvas.create_polygon(x+100, y+25, x+90, y+40, x+110, y+40,
+                                  fill="#890620", outline="#2C0703",
+                                  width=2, tags="character")
+        
+        # Arms
+        self.canvas.create_line(x+90, y+28, x+85, y+35,
+                              fill="#FFE5CC", width=2, tags="character")
+        self.canvas.create_line(x+110, y+28, x+115, y+35,
+                              fill="#FFE5CC", width=2, tags="character")
+        
+        # Legs
+        self.canvas.create_line(x+95, y+40, x+90, y+48,
+                              fill="#2C0703", width=2, tags="character")
+        self.canvas.create_line(x+105, y+40, x+110, y+48,
+                              fill="#2C0703", width=2, tags="character")
+        
+        # Backpack (coin bag)
+        self.canvas.create_oval(x+108, y+27, x+116, y+35,
+                              fill="#DA9F93", outline="#890620",
+                              width=2, tags="character")
+        self.canvas.create_text(x+112, y+31, text="C",
+                              fill="#890620", font=("Arial", 7, "bold"),
+                              tags="character")
     
     def on_city_click(self, event):
         """Handle city click during gameplay"""
@@ -294,7 +338,7 @@ class PathFinderGUI:
             x2, y2 = self.graph.get_position(city2.cityName)
             
             self.canvas.create_line(x1+100, y1+50, x2+100, y2+50,
-                                  fill="#f39c12", width=4, tags="user_path",
+                                  fill="#DA9F93", width=4, tags="user_path",
                                   arrow=tk.LAST, arrowshape=(16, 20, 6))
     
     def update_status(self):
@@ -403,7 +447,7 @@ class PathFinderGUI:
             x2, y2 = self.graph.get_position(city2.cityName)
             
             self.canvas.create_line(x1+100, y1+50, x2+100, y2+50,
-                                  fill="#27ae60", width=3, tags="ai_path",
+                                  fill="#890620", width=3, tags="ai_path",
                                   dash=(10, 5))
         
         # Compare results
@@ -445,15 +489,15 @@ class PathFinderGUI:
         
         self.result_label.config(text=comparison_text)
         
-        # Add legend
+        # Add legend with color scheme
         legend_y = 20
-        self.canvas.create_line(20, legend_y, 60, legend_y, fill="#f39c12", width=4)
-        self.canvas.create_text(120, legend_y, text="Your Path", fill="#f39c12", 
+        self.canvas.create_line(20, legend_y, 60, legend_y, fill="#DA9F93", width=4)
+        self.canvas.create_text(120, legend_y, text="Your Path", fill="#890620", 
                               font=("Arial", 10, "bold"), anchor=tk.W)
         
-        self.canvas.create_line(20, legend_y+25, 60, legend_y+25, fill="#27ae60", 
+        self.canvas.create_line(20, legend_y+25, 60, legend_y+25, fill="#890620", 
                               width=3, dash=(10, 5))
-        self.canvas.create_text(120, legend_y+25, text="AI Optimal Path", fill="#27ae60", 
+        self.canvas.create_text(120, legend_y+25, text="AI Optimal Path", fill="#890620", 
                               font=("Arial", 10, "bold"), anchor=tk.W)
     
     def reset_game(self):
