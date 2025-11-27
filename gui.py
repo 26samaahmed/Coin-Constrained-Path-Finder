@@ -293,7 +293,8 @@
 #             if new_coins > self.max_coins:
 #                 messagebox.showwarning("Insufficient Coins!", 
 #                                      f"This route costs {edge_info['coins']} coins.\n"
-#                                      f"You only have {self.max_coins - self.user_coins} coins left!")
+#                                      f"You only have {self.max_coins - self.user_coins} coins left!\n\n"
+#                                      f"Try using 'Undo Last Move' to go back.")
 #                 return
             
 #             # Valid move!
@@ -354,6 +355,11 @@
 #             messagebox.showinfo("Cannot Undo", "You're at the starting city!")
 #             return
         
+#         # If submitted, re-enable submit button
+#         if self.game_mode == "finished":
+#             self.game_mode = "playing"
+#             self.submit_btn.config(state="normal")
+        
 #         # Remove last city and recalculate
 #         last_city = self.user_path.pop()
 #         self.current_city = self.user_path[-1]
@@ -381,7 +387,7 @@
         
 #         self.game_mode = "finished"
 #         self.submit_btn.config(state="disabled")
-#         self.undo_btn.config(state="disabled")
+#         # Keep undo button enabled so players can go back and try again
         
 #         # Show completion message
 #         path_names = [city.cityName for city in self.user_path]
@@ -535,6 +541,26 @@ class PathFinderGUI:
         self.draw_graph()
     
     def create_widgets(self):
+        # Configure ttk Combobox style
+        style = ttk.Style()
+        style.theme_use('clam')  # Use clam theme for better customization
+        
+        # Configure Combobox colors
+        style.configure('TCombobox',
+                       fieldbackground='white',
+                       background='#EBD4CB',  # Arrow button background
+                       foreground='#2C0603',  # Text color
+                       arrowcolor='#2C0603',  # Arrow color
+                       bordercolor='#890620',
+                       lightcolor='#EBD4CB',
+                       darkcolor='#890620')
+        
+        style.map('TCombobox',
+                 fieldbackground=[('readonly', 'white')],
+                 selectbackground=[('readonly', '#B6465F')],
+                 selectforeground=[('readonly', 'white')],
+                 arrowcolor=[('disabled', '#95a5a6')])
+        
         # Control Panel
         control_frame = tk.Frame(self.root, bg="#2C0603", padx=15, pady=15)
         control_frame.pack(side=tk.LEFT, fill=tk.Y)
@@ -652,11 +678,11 @@ class PathFinderGUI:
                     # Draw edge labels
                     mx, my = (x1+x2)//2 + 100, (y1+y2)//2 + 50
                     self.canvas.create_text(mx, my-15, 
-                                          text=f"Distance: {edge_info['distance']}",
-                                          fill="#DAA094", font=("Arial", 9))
+                                          text=f"D:{edge_info['distance']}",
+                                          fill="#2C0703", font=("Arial", 9))
                     self.canvas.create_text(mx, my+5, 
-                                          text=f"Coins: {edge_info['coins']}",
-                                          fill="#EBD4CB", font=("Arial", 9, "bold"))
+                                          text=f"C:{edge_info['coins']}",
+                                          fill="#890620", font=("Arial", 9, "bold"))
         
         # Draw cities
         for city_name in self.graph.get_city_names():
