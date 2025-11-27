@@ -48,7 +48,7 @@ class PathFinderGUI:
         # Start City
         tk.Label(control_frame, text="Start City:", font=("Arial", 11),
                 bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
-        self.start_var = tk.StringVar(value="NYC")
+        self.start_var = tk.StringVar(value="Select Node")
         self.start_combo = ttk.Combobox(control_frame, textvariable=self.start_var,
                                    values=self.graph.get_city_names(),
                                    state="readonly", width=20)
@@ -57,7 +57,7 @@ class PathFinderGUI:
         # Destination City
         tk.Label(control_frame, text="Destination:", font=("Arial", 11),
                 bg="#2C0603", fg="white").pack(anchor=tk.W, pady=(8, 3))
-        self.dest_var = tk.StringVar(value="LA")
+        self.dest_var = tk.StringVar(value="Select Node")
         self.dest_combo = ttk.Combobox(control_frame, textvariable=self.dest_var,
                                   values=self.graph.get_city_names(),
                                   state="readonly", width=20)
