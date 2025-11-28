@@ -86,7 +86,7 @@ class PathFinderGUI:
 
         # Start City
         tk.Label(form_frame, text="Start City:", font=("Almendra", 25),
-                bg="#2C0603", fg="white").grid(row=0, column=0, sticky="w", pady=8)
+                bg="#2C0603", fg="white").grid(row=0, column=0, sticky="", pady=8)
         self.start_var = tk.StringVar(value="Select Node")
         self.start_combo = ttk.Combobox(form_frame, textvariable=self.start_var,
                                         values=self.graph.get_city_names(),
@@ -96,7 +96,7 @@ class PathFinderGUI:
 
         # Destination City 
         tk.Label(form_frame, text="Destination:", font=("Almendra", 25),
-                bg="#2C0603", fg="white").grid(row=1, column=0, sticky="w", pady=8)
+                bg="#2C0603", fg="white").grid(row=1, column=0, sticky="", pady=8)
         self.dest_var = tk.StringVar(value="Select Node")
         self.dest_combo = ttk.Combobox(form_frame, textvariable=self.dest_var,
                                     values=self.graph.get_city_names(),
@@ -106,7 +106,7 @@ class PathFinderGUI:
 
         # Coin Budget
         tk.Label(form_frame, text="Coin Budget:", font=("Almendra", 25),
-                bg="#2C0603", fg="white").grid(row=2, column=0, sticky="w", pady=8)
+                bg="#2C0603", fg="white").grid(row=2, column=0, sticky="", pady=8)
         self.coins_var = tk.StringVar(value="25")
         self.coins_entry = tk.Entry(form_frame, textvariable=self.coins_var,
                                     font=input_font, width=input_width)
