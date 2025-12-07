@@ -12,14 +12,15 @@ class PathFinder:
         Returns: (path, total_distance, coins_used) or (None, None, None) if no path exists
         """
         # Priority queue: (f_score, distance, coins_used, current_city, path)
-        pq = [(start_city.get_heuristic(), 0, 0, start_city, [start_city])]
+        #pq = [(start_city.get_heuristic(), 0, 0, start_city, [start_city])]
+        pq = [(start_city.get_heuristic(), 0, 0, id(start_city), start_city, [start_city])]
         visited = {}  # Maps (city, coins_remaining) to best distance found
         self.visited_cities = []
         self.explored_paths = []
         
         while pq:
-            f_score, distance, coins_used, current_city, path = heapq.heappop(pq)
-            
+            #f_score, distance, coins_used, current_city, path = heapq.heappop(pq)
+            f_score, distance, coins_used, _, current_city, path = heapq.heappop(pq)
             # Track for visualization
             if current_city not in self.visited_cities:
                 self.visited_cities.append(current_city)
@@ -54,7 +55,8 @@ class PathFinder:
                     # Track explored paths for visualization
                     self.explored_paths.append((current_city, neighbor_city))
                     
-                    heapq.heappush(pq, (new_f, new_distance, new_coins, neighbor_city, new_path))
+                    #heapq.heappush(pq, (new_f, new_distance, new_coins, neighbor_city, new_path))
+                    heapq.heappush(pq, (new_f, new_distance, new_coins, id(neighbor_city), neighbor_city, new_path))
         
         # No path found within coin constraint
         return None, None, None
@@ -66,3 +68,4 @@ class PathFinder:
     def get_explored_paths(self):
         """Returns list of edges explored during search"""
         return self.explored_paths
+    
