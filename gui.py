@@ -459,7 +459,8 @@ class PathFinderGUI:
 
             self.canvas.create_line(
                 sx1, sy1, sx2, sy2,
-                fill="#DA9F93",
+                #fill="#DA9F93",
+                fill="#B6465F",
                 width=4,
                 tags="user_path",
                 arrow=tk.LAST,
@@ -711,14 +712,14 @@ class PathFinderGUI:
 
         # Add legend
         legend_y = 20
-        self.canvas.create_line(20, legend_y, 60, legend_y, fill="#DA9F93", width=4)
+        self.canvas.create_line(20, legend_y, 60, legend_y, fill="#B6465F", width=4)
         self.canvas.create_text(
-            120, legend_y, text="Your Path", fill="#DA9F93", font=("Almendra", 15, "bold"), anchor=tk.W
+            120, legend_y, text="Your Path", fill="#B6465F", font=("Almendra", 15, "bold"), anchor=tk.W
         )
 
-        self.canvas.create_line(20, legend_y + 25, 60, legend_y + 25, fill="#B6465F", width=3, dash=(10, 5))
+        self.canvas.create_line(20, legend_y + 25, 60, legend_y + 25, fill="#890620", width=3, dash=(10, 5))
         self.canvas.create_text(
-            120, legend_y + 25, text="AI Optimal Path", fill="#B6465F", font=("Almendra", 15, "bold"), anchor=tk.W
+            120, legend_y + 25, text="AI Optimal Path", fill="#890620", font=("Almendra", 15, "bold"), anchor=tk.W
         )
 
     
