@@ -154,8 +154,7 @@ class PathFinderGUI:
                                    relief=tk.FLAT, padx=15, pady=7, width=20)
         self.reset_btn.pack(pady=5)
 
- 
-       # Game Status Title (OUTSIDE the frame)
+        # Status Display Label
         tk.Label(control_frame, text="Game Status", font=("Almendra", 25, "bold"), bg="#2C0603", fg="#EBD4CB").pack(pady=(0, 8))
 
         # Info Display with Scrollbar
