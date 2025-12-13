@@ -21,9 +21,5 @@ git clone https://github.com/jdc88/Coin-Constrained-Path-Finder
   ```bash
 python3 main.py
 ```
-  
-
-## ⟡ User Interface  
-*[Input video demo here once recorded]*  
 
 Developed by [Sama Ahmed](https://github.com/26samaahmed), [Josephine Choi](https://github.com/jdc88), [Karla Ramirez](https://github.com/karlaAx21)
